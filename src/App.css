@@ -1,0 +1,149 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+header {
+  background-color: #333;
+  color: white;
+  height: 60px;
+  padding-left: 35px;
+}
+
+h1 {
+  font-size: 30px;
+  padding:0;
+  height: 60px;
+  line-height: 60px;
+  vertical-align: middle;
+  margin: 0;
+}
+
+h1 i {
+  font-size: 50px;
+  color: #E84100;
+}
+
+h2 {
+  display: inline-block;
+  margin-right: 10px;
+  color: #E84100;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+
+.content-col {
+  width: 50%;
+  padding-left: 35px;
+  padding-right: 35px;
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.left {
+  /*background-color: blue;*/
+  border-right: 2px solid #ddd;
+  flex:7;
+
+}
+
+.right {
+  /*background-color: green;*/
+  flex:13;
+  padding: 10px;
+
+}
+
+iframe {
+  height:100%;
+  border: 1px solid #ddd;
+}
+
+.config {
+  flex:1;
+  overflow: auto;
+}
+
+.config .form-group {
+  padding-top: 10px;
+  min-height: 25px;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.config .form-group label {
+  margin-right: 13px;
+}
+
+.buttons {
+  height: 60px;
+}
+
+.buttons button {
+  margin-top: 10px;
+  font-size: 20px;
+  padding: 13px 22px;
+  margin-right: 10px;
+  background-color: #e84100;
+  border: 2px solid #e84100;
+  color: white;
+  /*font-weight: bold;*/
+  cursor: pointer;
+  font-family: 'Roboto';
+
+}
+.buttons button:hover i {
+  transform: scale(1.5);
+}
+
+.buttons button i {
+  vertical-align: top;
+  font-size: 20px;
+  margin-right: 10px;
+  transition: 0.3s ease-in all;
+}
+
+@media (max-width: 700px) {
+  .content {
+    flex-direction: column;
+    display: block;
+  }
+  .content-col {
+    width: calc(100% - 70px);
+    height: auto;
+  }
+
+  .left {
+    border-right: none;
+  }
+  
+  iframe {
+    height: 100%;
+  }
+
+}
+
+input {
+  font-family: 'Roboto';
+}
+
+input[type="number"] {
+  width: 30px;
+}
+
+input[type="text"], input[type="number"] {
+  padding: 5px;
+}
+
+input[type="color"] {
+  border: none;
+  background: white;
+  width: 50px;
+  height: 25px;
+}
