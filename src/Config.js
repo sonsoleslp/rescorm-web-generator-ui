@@ -12,7 +12,7 @@ export default class App extends Component {
 			{ name: "backgroundColor", noBreak: true, value: this.props.backgroundColor, type: "color", callback: (e) => {this.props.onConfigChange("backgroundColor", e.target.value)}},
 			{ name: "generalTextColor", value: this.props.generalTextColor, type: "color", callback: (e) => {this.props.onConfigChange("generalTextColor", e.target.value)}},
 			{ name: "logo", value: this.props.moodleXmlPath, type: "file", callback: (e) => {this.props.onConfigChange("logo", e.target.value)}},
-			{ name: "moodleXmlPath", value: this.props.moodleXmlPath, type: "file", callback: (e) => {this.props.onConfigChange("moodleXmlPath", e.target.value)}},
+			{ name: "moodleXmlPath", value: this.props.moodleXmlPath, type: "file", callback: (e) => {console.log(e);this.props.onConfigChange("moodleXmlPath", e.target.files[0])}},
 			{ name: "finish_screen", friendlyName: "Finish screen", value: this.props.finish_screen, type: "checkbox", callback: (e) => {this.props.onConfigChange("finish_screen", !this.props.finish_screen)}},
 			{ name: "feedback", value: this.props.feedback, type: "checkbox", callback: (e) => {this.props.onConfigChange("feedback", !this.props.feedback,)}},
 			{ name: "randomQuestions", value: this.props.randomQuestions, type: "checkbox", callback: (e) => {this.props.onConfigChange("randomQuestions", !this.props.randomQuestions)}},
@@ -22,7 +22,7 @@ export default class App extends Component {
 			{options.map(opt=>{
 				return [<div className="form-group" >
 				<label htmlFor={opt.name}><b>{opt.friendlyName || this.humanize(opt.name)}</b></label>
-				<input name={opt.name} type={opt.type} value={opt.value} min={opt.min} checked={opt.value} onChange={opt.callback}/>
+				<input name={opt.name} type={opt.type} value={opt.type === "file"? undefined: opt.value} min={opt.min} checked={opt.value} onChange={opt.callback}/>
 			</div>, opt.noBreak ? null: <br/>]
 			})}
 			<div className="form-group">

@@ -49,16 +49,30 @@ class App extends Component {
     );
   }
   preview(){
-    fetch("scorm12/index.html").then(res=>res.text()).then(res=>{
-      let content = res.replace('<div id="root"></div>',`<div id='root'></div><script>window._babelPolyfill = false; window.config=JSON.parse('${JSON.stringify({...this.state, content: undefined})}');</script>`)
-      let el = document.getElementById('visor')
-      el.contentWindow.document.open();
-      el.contentWindow.document.write(content);
-      el.contentWindow.document.close();
- 
+    fetch("scorm12/index.html").then(res=>res.text()).then(response=>{
+      if (this.state.moodleXmlPath) {
+        let reader = new FileReader();
+        reader.onload = ((file) => {
+          return (e) => { 
+           this.onloadend(e.target.result,response);
+          }
+        })(this.state.moodleXmlPath)
+        reader.readAsText(this.state.moodleXmlPath);
+      } else {
+        this.onloadend(undefined, response);
+      }
     })
+
   }
 
+  onloadend(result,res) {
+    let content = res.replace('<div id="root"></div>',`<div id='root'></div><script>window._babelPolyfill = false; 
+    window.config=JSON.parse('${JSON.stringify({...this.state, moodleXmlPath: result, content: undefined, dev: true})}');</script>`)
+    let el = document.getElementById('visor')
+    el.contentWindow.document.open();
+    el.contentWindow.document.write(content);
+    el.contentWindow.document.close();
+  }
   download() {
     generatePackage(this.state);
   }
