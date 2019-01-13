@@ -11,12 +11,15 @@ export default class App extends Component {
 			{ name: "secondaryColorText", value: this.props.secondaryColorText, type: "color", callback: (e) => {this.props.onConfigChange("secondaryColorText", e.target.value)}},
 			{ name: "backgroundColor", noBreak: true, value: this.props.backgroundColor, type: "color", callback: (e) => {this.props.onConfigChange("backgroundColor", e.target.value)}},
 			{ name: "generalTextColor", value: this.props.generalTextColor, type: "color", callback: (e) => {this.props.onConfigChange("generalTextColor", e.target.value)}},
-			{ name: "logo", value: this.props.moodleXmlPath, type: "file", callback: (e) => {this.props.onConfigChange("logo", e.target.value)}},
-			{ name: "moodleXmlPath", value: this.props.moodleXmlPath, type: "file", callback: (e) => {console.log(e);this.props.onConfigChange("moodleXmlPath", e.target.files[0])}},
-			{ name: "finish_screen", friendlyName: "Finish screen", value: this.props.finish_screen, type: "checkbox", callback: (e) => {this.props.onConfigChange("finish_screen", !this.props.finish_screen)}},
-			{ name: "feedback", value: this.props.feedback, type: "checkbox", callback: (e) => {this.props.onConfigChange("feedback", !this.props.feedback,)}},
+			{ name: "logo", value: this.props.moodleXmlPath, type: "file", callback: (e) => {this.readFile(e.target.files[0], res => this.props.onConfigChange("logo", res),true)}},
+			{ name: "moodleXmlPath", value: this.props.moodleXmlPath, type: "file", callback: (e) => {this.readFile(e.target.files[0], res => this.props.onConfigChange("moodleXmlPath", res))}},
+			{ name: "finish_screen",  noBreak: true, friendlyName: "Finish screen", value: this.props.finish_screen, type: "checkbox", callback: (e) => {this.props.onConfigChange("finish_screen", !this.props.finish_screen)}},
+			{ name: "feedback",  noBreak: true, value: this.props.feedback, type: "checkbox", callback: (e) => {this.props.onConfigChange("feedback", !this.props.feedback,)}},
 			{ name: "randomQuestions", value: this.props.randomQuestions, type: "checkbox", callback: (e) => {this.props.onConfigChange("randomQuestions", !this.props.randomQuestions)}},
-			{ name: "n", friendlyName: "Number of questions", value: this.props.n, min: 0, type: "number", callback: (e) => {this.props.onConfigChange("n", parseInt(e.target.value))}},
+			{ name: "n", noBreak: true, friendlyName: "Number of questions", value: this.props.n, min: 0, type: "number", callback: (e) => {this.props.onConfigChange("n", parseInt(e.target.value))}},
+			{ name: "threshold", value: this.props.threshold, type: "number", callback: (e) => {this.props.onConfigChange("threshold", e.target.value)}},
+			{ name: "successMessage", value: this.props.successMessage, type: "text", callback: (e) => {this.props.onConfigChange("successMessage", e.target.value)}},
+			{ name: "failMessage", value: this.props.failMessage, type: "text", callback: (e) => {this.props.onConfigChange("failMessage", e.target.value)}},
 		];
 		return <div className="config">
 			{options.map(opt=>{
@@ -34,6 +37,18 @@ export default class App extends Component {
 
 			</div>
 		</div>
+	}
+
+	readFile(file, callback, isImage) {
+		try {
+			const reader = new FileReader()
+			reader.onload = event => callback(event.target.result);
+			reader.onerror = error => callback("");
+			reader.readAsDataURL(file);	
+		} catch (e) {
+			callback("");
+		}
+
 	}
 
 	humanize(str) {
