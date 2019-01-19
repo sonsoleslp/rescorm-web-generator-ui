@@ -22,13 +22,14 @@ export const generatePackage  = (state) => {
 
 }
 function decode(input) {
-    decodeURIComponent(window.atob(input.slice(21)).split('').map(function(c) {
+    return decodeURIComponent(window.atob(input.slice(21)).split('').map(function(c) {
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''))
 }
 
 function generateIndex(state) {
-	return `<!DOCTYPE html>
+    let parsedState = JSON.stringify({...state, content: undefined, moodleXmlPath: state.moodleXmlPath ? "assets/quiz.xml" : undefined});
+    return `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -40,7 +41,7 @@ function generateIndex(state) {
  </head>
 <body>
 <div id="root"></div>
-<script> window.config=JSON.parse('${JSON.stringify({...state, content: undefined, moodleXmlPath: undefined})}');</script>
+<script> window.config=JSON.parse('${parsedState}');</script>
 <script type="text/javascript" src="bundle.js"></script>
 </body>
 </html>`;
