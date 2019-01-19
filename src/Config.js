@@ -12,7 +12,7 @@ export default class App extends Component {
 			{ name: "backgroundColor", noBreak: true, value: this.props.backgroundColor, type: "color", callback: (e) => {this.props.onConfigChange("backgroundColor", e.target.value)}},
 			{ name: "generalTextColor", value: this.props.generalTextColor, type: "color", callback: (e) => {this.props.onConfigChange("generalTextColor", e.target.value)}},
 			{ name: "logo", value: this.props.moodleXmlPath, type: "file", callback: (e) => {this.readFile(e.target.files[0], res => this.props.onConfigChange("logo", res),true)}},
-			{ name: "moodleXmlPath", value: this.props.moodleXmlPath, type: "file", callback: (e) => {this.readFile(e.target.files[0], res => this.props.onConfigChange("moodleXmlPath", res))}},
+			{ name: "moodleXml", friendlyName: "Moodle XML", value: this.props.moodleXmlPath, type: "file", callback: (e) => {this.readFile(e.target.files[0], res => this.props.onConfigChange("moodleXmlPath", res))}},
 			{ name: "finish_screen",  noBreak: true, friendlyName: "Finish screen", value: this.props.finish_screen, type: "checkbox", callback: (e) => {this.props.onConfigChange("finish_screen", !this.props.finish_screen)}},
 			{ name: "feedback",  noBreak: true, value: this.props.feedback, type: "checkbox", callback: (e) => {this.props.onConfigChange("feedback", !this.props.feedback,)}},
 			{ name: "randomQuestions", value: this.props.randomQuestions, type: "checkbox", callback: (e) => {this.props.onConfigChange("randomQuestions", !this.props.randomQuestions)}},
@@ -30,10 +30,10 @@ export default class App extends Component {
 			})}
 			<div className="form-group">
 				<label htmlFor="scormVersion"><b>SCORM Version</b></label>
-				<input name="scormVersion" type="radio" value={"1.2"} checked={this.props.scormVersion === "1.2"} onChange={(e) => {this.props.onConfigChange("scormVersion", "1.2")}}/>
 				<label htmlFor="scormVersion">{"SCORM 1.2"}</label>
-				<input name="scormVersion" type="radio" value={"1.2"} checked={this.props.scormVersion === "2004"} onChange={(e) => {this.props.onConfigChange("scormVersion", "2004")}}/>
+				<input name="scormVersion" type="radio" value={"1.2"} checked={this.props.scormVersion === "1.2"} onChange={(e) => {this.props.onConfigChange("scormVersion", "1.2")}}/>
 				<label htmlFor="scormVersion">{"SCORM 2004"}</label>
+				<input name="scormVersion" type="radio" value={"1.2"} checked={this.props.scormVersion === "2004"} onChange={(e) => {this.props.onConfigChange("scormVersion", "2004")}}/>
 
 			</div>
 		</div>

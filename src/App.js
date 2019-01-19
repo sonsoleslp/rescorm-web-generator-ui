@@ -8,7 +8,7 @@ class App extends Component {
     super(props);
     this.state = {
       title: "Quiz",
-      primaryColor: "#e84100",
+      primaryColor: "#20BEB8",
       primaryColorText: "#ffffff",
       secondaryColor: "#333333",
       secondaryColorText: "#ffffff",
@@ -36,7 +36,7 @@ class App extends Component {
             <i className="material-icons">info</i>
           </button>
           <h1><i className="material-icons">school</i> 
-          RESCORM Quiz generator
+          <a target="_blank"  rel="noopener noreferrer" href="https://github.com/agordillo/RESCORM">RESCORM</a> Quiz generator
           </h1>
           </header>
         <div className="content"> 

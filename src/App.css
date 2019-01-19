@@ -18,18 +18,25 @@ h1 {
   line-height: 60px;
   vertical-align: middle;
   margin: 0;
+  font-weight: lighter;
+}
+
+h1 a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
 }
 
 h1 i {
   font-size: 50px;
-  color: #E84100;
+  color: #20BEB8;
   margin-right: 10px;
 }
 
 h2 {
   display: inline-block;
   margin-right: 10px;
-  color: #E84100;
+  color: #20BEB8;
 }
 
 .content {
@@ -91,12 +98,13 @@ iframe {
   font-size: 20px;
   padding: 13px 22px;
   margin-right: 10px;
-  background-color: #e84100;
-  border: 2px solid #e84100;
+  background-color: #20BEB8;
+  border: 2px solid #20BEB8;
   color: white;
   /*font-weight: bold;*/
   cursor: pointer;
-  font-family: 'Roboto';
+  font-family: 'Source Sans Pro';
+  outline: none;
 
 }
 .buttons button:hover i {
@@ -110,28 +118,9 @@ iframe {
   transition: 0.3s ease-in all;
 }
 
-@media (max-width: 700px) {
-  .content {
-    flex-direction: column;
-    display: block;
-  }
-  .content-col {
-    width: calc(100% - 70px);
-    height: auto;
-  }
-
-  .left {
-    border-right: none;
-  }
-  
-  iframe {
-    height: 100%;
-  }
-
-}
 
 input {
-  font-family: 'Roboto';
+  font-family: 'Source Sans Pro';
 }
 
 input[type="number"] {
@@ -149,9 +138,19 @@ input[type="color"] {
   height: 25px;
 }
 
+input[type="checkbox"], input[type="radio"] {
+  vertical-align: middle;
+  margin-left: -7px;  
+}
+
+input[type="radio"] {
+  margin-top: 0px;
+  margin-right: 15px;
+}   
+
 .info {
   float:right;
-  color: white;
+  color: #20BEB8;
   background: none;
   outline: none;
   border: none;
@@ -176,6 +175,16 @@ input[type="color"] {
   justify-content: center;
 }
 
+h3 {
+  font-size: 1.3em;
+  margin: 0px;
+  color: #20BEB8;
+}
+
+h4{
+  color: grey;
+  margin-bottom: 0px;
+}
 .modal.hidden {
   display: none;
 }
@@ -191,8 +200,11 @@ input[type="color"] {
 .modal .modal-body {
   background-color: white;
   height: auto;
-  min-width: 500px;
-  padding: 15px;
+  min-width: 300px;
+  max-width: 60%;
+  padding: 25px;
+  max-height: 90%;
+  overflow: auto;
   text-align: left;
 }
 
@@ -203,6 +215,49 @@ input[type="color"] {
   cursor: pointer;
   float: right;
 }
+.modal-body a {
+  color: #20BEB8;
+  text-decoration: none;
+  /*font-weight: bolder;*/
+}
+.modal-body a:hover {
+  text-decoration: underline;
+
+}
+
+hr{
+  border: 1px solid #ccc;
+}
 input {
   max-width: 300px;
+}
+
+
+
+@media (max-width: 800px) {
+  .content {
+    flex-direction: column;
+    display: block;
+  }
+  .content-col {
+    width: calc(100% - 70px);
+    height: auto;
+  }
+
+  .left {
+    border-right: none;
+  }
+
+  .right {
+    height: 40%;
+  }
+  
+  iframe {
+    height: 100%;
+  }
+
+  .modal .modal-body {
+    max-width: 90%;
+  }
+
 }

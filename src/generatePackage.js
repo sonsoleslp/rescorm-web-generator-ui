@@ -3,18 +3,15 @@ import JSZipUtils from 'jszip-utils';
 import FileSaver from 'file-saver';
 
 export const generatePackage  = (state) => {
-    let zip_title = "scorm.zip"
- 
     JSZipUtils.getBinaryContent(state.scormVersion === "2004" ? "scorm2004.zip":"scorm12.zip", function(err, data) {
         if (err) {
             throw err; // or handle err
         }
         JSZip.loadAsync(data).then(function(zip) {
-        	console.log(zip)
         	let indexContent = generateIndex(state)
 			zip.file('index.html', indexContent);
             if (state.moodleXmlPath) {
-                zip.file("assets/test2.xml", decode(state.moodleXmlPath));
+                zip.file("assets/quiz.xml", decode(state.moodleXmlPath));
             } 
 			zip.generateAsync({ type: "blob" }).then(function(blob) {
                 FileSaver.saveAs(blob, state.title.toLowerCase().replace(/\s/g, '') + Math.round(+new Date() / 1000) + (state.scormVersion === "2004" ? "_2004" : "_1.2") + ".zip");
@@ -25,7 +22,9 @@ export const generatePackage  = (state) => {
 
 }
 function decode(input) {
-    return window.atob(input.slice(21));
+    decodeURIComponent(window.atob(input.slice(21)).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''))
 }
 
 function generateIndex(state) {
@@ -33,11 +32,11 @@ function generateIndex(state) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>RESCORM Boilerplate</title>
+    <title>${state.title || "Quiz"}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
  </head>
 <body>
 <div id="root"></div>
